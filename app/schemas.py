@@ -1,18 +1,20 @@
-from pydantic import BaseModel, EmailStr
+# app/schemas.py
+from typing import Optional
+from pydantic import BaseModel
 
 class UserBase(BaseModel):
     name: str
-    email: EmailStr
-    quotes: str
+    email: str
+    quotes: Optional[str] = None
 
 class UserCreate(UserBase):
-    password: str
+    pass
 
 class UserUpdate(UserBase):
-    password: str = None
+    pass
 
 class User(UserBase):
     id: int
 
     class Config:
-        from_attributes = True  # Updated for Pydantic V2
+        orm_mode = True
